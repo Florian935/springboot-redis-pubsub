@@ -15,7 +15,7 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class ProductPublisher implements Publisher<Product> {
 
-    RedisTemplate<String, Product> redisTemplate;
+    RedisTemplate<String, Object> redisTemplate;
     ChannelTopic channelTopic;
 
     @Override

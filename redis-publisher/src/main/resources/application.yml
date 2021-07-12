@@ -3,7 +3,7 @@ server:
 
 redis:
   config:
-    host: hostname
+    host: localhost
     port: 6379
     databaseIndex: 4
     channel: pubsub:florian935-product-channel
