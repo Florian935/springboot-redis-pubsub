@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+redis:
+  config:
+    host: hostname
+    port: 6379
+    databaseIndex: 4
+    channel: pubsub:florian935-product-channel
