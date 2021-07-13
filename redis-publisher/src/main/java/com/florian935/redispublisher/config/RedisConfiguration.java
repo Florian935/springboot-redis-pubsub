@@ -1,6 +1,5 @@
 package com.florian935.redispublisher.config;
 
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
