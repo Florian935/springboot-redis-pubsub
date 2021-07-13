@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.florian935</groupId>
-	<artifactId>redis-publisher</artifactId>
+	<artifactId>redis-subscriber2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>redis-publisher</name>
-	<description>Demo project for Spring Boot with Redis pub sub</description>
+	<name>redis-subscriber2</name>
+	<description>Demo project for Spring Boot with Redis messaging</description>
 	<properties>
 		<java.version>16</java.version>
 	</properties>
@@ -46,6 +46,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
