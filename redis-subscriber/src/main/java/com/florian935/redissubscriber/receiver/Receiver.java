@@ -10,6 +10,6 @@ public class Receiver implements MessageListener {
     @Override
     public void onMessage(Message message, byte[] bytes) {
 
-      log.info("Consumed event :: {}", message);
+        log.info("Consumed event :: {}", message);
     }
 }
