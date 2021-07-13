@@ -15,12 +15,12 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class ProductPublisher implements Publisher<Product> {
 
-    RedisTemplate<String, Object> redisTemplate;
+    RedisTemplate<String, Product> redisTemplate;
     ChannelTopic channelTopic;
 
     @Override
     public void publish(Product product) {
 
-        redisTemplate.convertAndSend(channelTopic.getTopic(), product.toString());
+        redisTemplate.convertAndSend(channelTopic.getTopic(), product);
     }
 }
