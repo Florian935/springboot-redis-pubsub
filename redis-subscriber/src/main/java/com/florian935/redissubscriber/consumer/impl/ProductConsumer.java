@@ -12,6 +12,6 @@ public class ProductConsumer implements Consumer<Product> {
     @Override
     public void handleMessage(Product product) {
 
-        System.out.println(product);
+        log.info("Consumed event :: {}", product);
     }
 }
