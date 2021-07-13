@@ -1,7 +1,8 @@
 package com.florian935.redissubscriber.config;
 
 
-import com.florian935.redissubscriber.receiver.Receiver;
+import com.florian935.redissubscriber.domain.Product;
+import com.florian935.redissubscriber.consumer.impl.ProductConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
-import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -34,11 +35,12 @@ public class RedisConfiguration {
     }
 
     @Bean
-    RedisTemplate<String, Object> redisTemplate() {
+    RedisTemplate<String, Product> redisTemplate() {
 
-        final RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        final RedisTemplate<String, Product> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(connectionFactory());
-        redisTemplate.setValueSerializer(new GenericToStringSerializer<>(Object.class));
+        redisTemplate.setDefaultSerializer(jackson2JsonRedisSerializer());
+        redisTemplate.afterPropertiesSet();
 
         return redisTemplate;
     }
@@ -50,9 +52,19 @@ public class RedisConfiguration {
     }
 
     @Bean
+    Jackson2JsonRedisSerializer<Product> jackson2JsonRedisSerializer() {
+
+        return new Jackson2JsonRedisSerializer<>(Product.class);
+    }
+
+    @Bean
     MessageListenerAdapter messageListenerAdapter() {
 
-        return new MessageListenerAdapter(new Receiver());
+        final MessageListenerAdapter messageListenerAdapter =
+                new MessageListenerAdapter(new ProductConsumer());
+        messageListenerAdapter.setSerializer(jackson2JsonRedisSerializer());
+
+        return messageListenerAdapter;
     }
 
     @Bean
